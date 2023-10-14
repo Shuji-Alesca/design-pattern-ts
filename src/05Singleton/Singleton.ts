@@ -6,6 +6,7 @@ export class Singleton {
 
   public static getInstance (): Singleton {
     if (Singleton.singleton == null) {
+      console.log('インスタンスを作成しました')
       Singleton.singleton = new Singleton()
     }
 
