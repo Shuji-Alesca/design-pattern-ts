@@ -1,10 +1,14 @@
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class Singleton {
-  private static readonly singleton: Singleton = new Singleton()
-  private constructor () {
-    console.log('インスタンスを生成しました')
-  }
+  private static singleton: Singleton
+
+  private constructor () {}
 
   public static getInstance (): Singleton {
+    if (Singleton.singleton == null) {
+      Singleton.singleton = new Singleton()
+    }
+
     return Singleton.singleton
   }
 }
