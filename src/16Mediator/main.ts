@@ -1,6 +1,6 @@
 import { LoginForm } from './LoginForm'
 
 window.onload = () => {
-  const loginForm = new LoginForm()
-  console.log(loginForm)
+  // eslint-disable-next-line no-new
+  new LoginForm()
 }

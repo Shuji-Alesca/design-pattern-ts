@@ -4,28 +4,51 @@ import { ColleagueTextField } from './ColleagueTextField'
 import { type Mediator } from './Mediator'
 
 export class LoginForm implements Mediator {
+  private readonly checkGuest: ColleagueCheckbox
+  private readonly checkLogin: ColleagueCheckbox
+  private readonly textUser: ColleagueTextField
+  private readonly textPass: ColleagueTextField
+  private readonly buttonOK: ColleagueButton
+  private readonly buttonCancel: ColleagueButton
   constructor () {
-    // this.usernameInput = document.getElementById('username') as HTMLInputElement
-    // this.passwordInput = document.getElementById('password') as HTMLInputElement
-
-    this.createColleagues()
-  }
-
-  createColleagues (): void {
-    const buttonOK = new ColleagueButton('OK')
-    const textUser = new ColleagueTextField('', 10)
-    const textPass = new ColleagueTextField('', 10)
-    const checkGuest = new ColleagueCheckbox('Guest', 'g', true)
-    const checkLogin = new ColleagueCheckbox('Login', 'g', false)
-    buttonOK.setMediator(this)
-    textUser.setMediator(this)
-    textPass.setMediator(this)
-    checkGuest.setMediator(this)
-    checkLogin.setMediator(this)
+    this.textUser = new ColleagueTextField('', 10, '')
+    this.textPass = new ColleagueTextField('', 10, 'password')
+    this.checkGuest = new ColleagueCheckbox('Guest', 'g', true)
+    this.checkLogin = new ColleagueCheckbox('Login', 'g', false)
+    this.buttonOK = new ColleagueButton('OK')
+    this.buttonCancel = new ColleagueButton('Cancel')
+    this.checkGuest.setMediator(this)
+    this.checkLogin.setMediator(this)
+    this.textUser.setMediator(this)
+    this.textPass.setMediator(this)
+    this.buttonOK.setMediator(this)
+    this.buttonCancel.setMediator(this)
+    this.colleagueChanged()
   }
 
   colleagueChanged (): void {
-    // フォームの有効/無効を切り替えるロジックをここに書く
-    console.log('colleague changed')
+    if (this.checkGuest.getState()) {
+      // フォームの有効/無効を切り替えるロジックをここに書く
+      this.textUser.setColleagueEnabled(false)
+      this.textPass.setColleagueEnabled(false)
+      this.buttonOK.setColleagueEnabled(true)
+    } else {
+      this.textUser.setColleagueEnabled(true)
+      this.userpassChanged()
+    }
+  }
+
+  userpassChanged (): void {
+    if (this.textUser.getText().length > 0) {
+      this.textPass.setColleagueEnabled(true)
+      if (this.textPass.getText().length > 0) {
+        this.buttonOK.setColleagueEnabled(true)
+      } else {
+        this.buttonOK.setColleagueEnabled(false)
+      }
+    } else {
+      this.textPass.setColleagueEnabled(false)
+      this.buttonOK.setColleagueEnabled(false)
+    }
   }
 }

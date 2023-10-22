@@ -7,7 +7,7 @@ export class ColleagueCheckbox implements Colleague {
 
   constructor (caption: string, group: string, state: boolean) {
     this.checkbox = document.createElement('input')
-    this.checkbox.type = 'checkbox'
+    this.checkbox.type = 'radio'
     this.checkbox.name = group
     this.checkbox.checked = state
     this.checkbox.id = caption // ラベルと関連付けるためにidを設定
@@ -28,5 +28,10 @@ export class ColleagueCheckbox implements Colleague {
 
   setColleagueEnabled (enabled: boolean): void {
     this.checkbox.disabled = !enabled
+  }
+
+  getState (): boolean {
+    console.log(this.checkbox.id, this.checkbox.checked)
+    return this.checkbox.checked
   }
 }

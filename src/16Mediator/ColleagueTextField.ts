@@ -5,14 +5,13 @@ export class ColleagueTextField implements Colleague {
   private mediator: Mediator | null = null
   private readonly textField: HTMLInputElement
 
-  constructor (text: string, columns: number) {
+  constructor (text: string, columns: number, type: string) {
     this.textField = document.createElement('input')
-    this.textField.type = 'text'
+    this.textField.type = type === 'password' ? type : 'text'
     this.textField.value = text
     this.textField.size = columns
 
     this.textField.addEventListener('input', () => { this.mediator?.colleagueChanged() })
-
     document.getElementById('loginForm')?.appendChild(this.textField)
   }
 
@@ -24,5 +23,9 @@ export class ColleagueTextField implements Colleague {
     this.textField.disabled = !enabled
     // 無効化されたテキストフィールドの背景色を変更
     this.textField.style.backgroundColor = enabled ? 'white' : 'lightgray'
+  }
+
+  getText (): string {
+    return this.textField.value
   }
 }
