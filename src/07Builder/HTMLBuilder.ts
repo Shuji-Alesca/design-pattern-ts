@@ -6,7 +6,7 @@ export class HTMLBuilder implements Builder {
   private sb: string = ''
 
   makeTitle (title: string): void {
-    this.filename = title + '.html'
+    this.filename = `./src/07Builder/${title}.html`
     this.sb += '<!DOCTYPE html>\n'
     this.sb += '<html>\n'
     this.sb += '<head><title>'

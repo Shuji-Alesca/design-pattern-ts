@@ -8,7 +8,7 @@ import { DivFactory } from './divfactory/DivFactory'
 // Factoryを継承しているクラスをロード
 Factory.factories.push(ListFactory, DivFactory)
 
-const filename = 'DesignPatternSample.html'
+const filename = './src/08AbstractFactory/DesignPatternSample.html'
 const classname = 'DivFactory' // ListFactoryを入力するとlist形式のhtmlが出力される
 
 const factory: Factory = Factory.getFactory(classname)
